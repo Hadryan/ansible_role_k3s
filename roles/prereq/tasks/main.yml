@@ -96,21 +96,13 @@
     force_apt_get: yes
   when: ansible_facts['os_family'] == "Debian"
 
-- name: Add alias for pip3.9
-   ansible.builtin.template: 
-    src: "templates/pip3.9.sh.j2"
-    dest: "/etc/profile.d/pip3.9.sh"
-    mode: 0755
-    owner: root
-    group: root
-
 - name: upgrade pip
   pip:
     name:
       - pip
     state: forcereinstall
     extra_args: --upgrade
-    executable: pip3.9
+    executable: pip3
 
 
 - name: install python kubernetes core pre-requisites
@@ -125,4 +117,4 @@
       - oauthlib
     state: present
     extra_args: --upgrade
-    executable: pip3.9
+    executable: pip3
